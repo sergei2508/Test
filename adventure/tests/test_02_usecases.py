@@ -10,7 +10,7 @@ from adventure import models, notifiers, repositories, usecases
 
 class MockJourneyRepository(repositories.JourneyRepository):
     def get_or_create_car(self) -> models.VehicleType:
-        return models.VehicleType(name="car", max_capacity=5)
+        return models.VehicleType(name="car", max_capacity=4)
 
     def create_vehicle(
         self, name: str, passengers: int, vehicle_type: models.VehicleType

@@ -7,7 +7,7 @@ from adventure import models
 
 @pytest.fixture
 def car():
-    return models.VehicleType(max_capacity=5)
+    return models.VehicleType(max_capacity=4)
 
 
 class TestVehicle:
