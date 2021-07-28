@@ -8,7 +8,7 @@ What he has told us is that the software was "almost" done and that any develope
 
 ## Your mission is:
 
-- Fork this project
+- Clone this project
 - Disable the unit tests marked as `@pytest.mark.skip`
 - Build the functionalities needed for the app to pass all the tests executing `docker-compose run --rm web pytest`
 - There's code that's been written way too fast and it probably doesn't meet our clean architecture, could you refactor it?
