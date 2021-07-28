@@ -10,6 +10,13 @@ def car():
     return models.VehicleType(max_capacity=4)
 
 
+@pytest.fixture
+def tesla(car):
+    return models.Vehicle(
+        name="Tesla", passengers=3, vehicle_type=car, number_plate="AA-12-34"
+    )
+
+
 class TestVehicle:
     def test_capacity_greater_than_passengers(self, car):
         vehicle = models.Vehicle(vehicle_type=car, passengers=2)
@@ -50,10 +57,10 @@ class TestVehicle:
 class TestJourney:
     # TODO: implement "is_finished" method
     # a finished journey depends on the end value
-    def test_is_finished(self):
-        journey = models.Journey(start=date.today(), end=date.today())
+    def test_is_finished(self, tesla):
+        journey = models.Journey(start=date.today(), end=date.today(), vehicle=tesla)
         assert journey.is_finished()
 
-    def test_is_not_finished(self):
-        journey = models.Journey(start=date.today())
+    def test_is_not_finished(self, tesla):
+        journey = models.Journey(start=date.today(), vehicle=tesla)
         assert not journey.is_finished()
