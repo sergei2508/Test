@@ -30,9 +30,16 @@ class TestVehicle:
     def test_vehicle_distribution(self, car):
         # TODO: implement a method called "get_distribution" that returns a matrix filled of booleans
         # with the "standard distribution" in a vehicle, from top to bottom and left to right.
+        # A Vehicle can have "n" rows with a maximum of 2 passengers per row.
         #
         # e.g: for 3 passengers
         # [
+        #     [ True, True],
+        #     [ True, False],
+        # ]
+        # for 5 passengers
+        # [
+        #     [ True, True],
         #     [ True, True],
         #     [ True, False],
         # ]
