@@ -7,8 +7,17 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-  web:
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.0
+    ports:
+      - 8025:8025
+
+  base: &base
     build: .
+
+  web:
+    << : *base
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
@@ -18,7 +27,6 @@ services:
       - db
       - mailhog
 
-  mailhog:
-    image: mailhog/mailhog:v1.0.0
-    ports:
-      - 8025:8025
+  test:
+    << : *base
+    command: pytest
