@@ -11,6 +11,11 @@ def car():
 
 
 @pytest.fixture
+def van():
+    return models.VehicleType(max_capacity=6)
+
+
+@pytest.fixture
 def tesla(car):
     return models.Vehicle(
         name="Tesla", passengers=3, vehicle_type=car, number_plate="AA-12-34"
@@ -27,10 +32,11 @@ class TestVehicle:
         assert not vehicle.can_start()
 
     @pytest.mark.skip  # Remove
-    def test_vehicle_distribution(self, car):
+    def test_vehicle_distribution(self, car, van):
         # TODO: implement a method called "get_distribution" that returns a matrix filled of booleans
         # with the "standard distribution" in a vehicle, from top to bottom and left to right.
         # A Vehicle can have "n" rows with a maximum of 2 passengers per row.
+        # The rows number depends on the vehicle max capacity.
         #
         # e.g: for 3 passengers
         # [
@@ -45,6 +51,10 @@ class TestVehicle:
         # ]
         vehicle = models.Vehicle(vehicle_type=car, passengers=3)
         distribution_expected = [[True, True], [True, False]]
+        assert vehicle.get_distribution() == distribution_expected
+
+        vehicle = models.Vehicle(vehicle_type=van, passengers=5)
+        distribution_expected = [[True, True], [True, True], [True, False]]
         assert vehicle.get_distribution() == distribution_expected
 
     @pytest.mark.skip  # Remove
