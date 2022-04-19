@@ -1,5 +1,4 @@
 from django.core import mail
-
 from adventure.models import Journey
 
 

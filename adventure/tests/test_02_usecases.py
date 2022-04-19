@@ -1,5 +1,6 @@
 import pytest
 from django.utils import timezone
+from datetime import date
 
 from adventure import models, notifiers, repositories, usecases
 
@@ -53,9 +54,13 @@ class TestStartJourney:
 
 
 class TestStopJourney:
-    @pytest.mark.skip  # Remove
     def test_stop(self):
-        # TODO: Implement a StopJourney Usecase
-        # it takes a started journey as a parameter and sets an "end" value
-        # then saves it to the database
-        pass
+        repo = MockJourneyRepository()
+        type_car=repo.get_or_create_car()
+        vehicle=repo.create_vehicle("Tesla", 3, type_car)
+        journey = repo.create_journey(vehicle)
+        vals = {"date": date.today()}
+        notifier = MockNotifier()
+        usecase = usecases.StopJourney(repo, notifier, journey).set_params(vals)
+        usecase.execute()
+        assert journey.end == date.today()
