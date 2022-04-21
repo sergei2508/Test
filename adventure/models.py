@@ -21,19 +21,7 @@ class Vehicle(models.Model):
         return self.vehicle_type.max_capacity >= self.passengers
 
     def get_distribution(self) -> list:
-        count = 0
-        row = []
-        distribution = []
-        for i in range(int(self.vehicle_type.max_capacity/2)):
-            for j in range(2):
-                if self.passengers > count:
-                    row.append(True)
-                    count +=1
-                else:
-                    row.append(False)
-                    count +=1
-            distribution.append(row)
-            row = []
+        distribution = [[(True if self.passengers > (a+1)*(b+1) else False) for a in range(2)] for b in range(int(self.vehicle_type.max_capacity/2))]
         return distribution
 
     def validate_number_plate(plate) -> bool:
