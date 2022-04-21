@@ -37,6 +37,10 @@ class TestVehicle:
         vehicle = models.Vehicle(vehicle_type=van, passengers=5)
         distribution_expected = [[True, True], [True, True], [True, False]]
         assert vehicle.get_distribution() == distribution_expected
+        
+        vehicle = models.Vehicle(vehicle_type=van, passengers=6)
+        distribution_expected = [[True, True], [True, True], [True, True]]
+        assert vehicle.get_distribution() == distribution_expected
 
     def test_valid_number_plate(self):
         assert models.Vehicle.validate_number_plate("AA-12-34")

@@ -21,7 +21,7 @@ class Vehicle(models.Model):
         return self.vehicle_type.max_capacity >= self.passengers
 
     def get_distribution(self) -> list:
-        distribution = [[(True if self.passengers > (a+1)*(b+1) else False) for a in range(2)] for b in range(int(self.vehicle_type.max_capacity/2))]
+        distribution = [[(True  if self.passengers > ((b*2)+a) else False) for a in range(2)] for b in range(int(self.vehicle_type.max_capacity/2))]
         return distribution
 
     def validate_number_plate(plate) -> bool:
@@ -44,5 +44,4 @@ class Journey(models.Model):
         return f"{self.vehicle.name} ({self.start} - {self.end})"
 
     def is_finished(self) -> bool:
-        result = True if self.end else False
-        return result
+        return True if self.end else False  
