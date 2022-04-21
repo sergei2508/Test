@@ -32,7 +32,8 @@ class Vehicle(models.Model):
                 result = False
         except:
             result = False
-        return result
+        finally:
+            return result
 
 
 class Journey(models.Model):
